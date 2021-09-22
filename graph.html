@@ -1,0 +1,280 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @keyframes example {
+            from {
+                background-color: #2f4454;
+            }
+
+            to {
+                background-color: #DA7B93;
+            }
+        }
+
+        body {
+            background-color: #1F2833;
+        }
+
+        .grid {
+            position: absolute;
+            left: 27.5%;
+            border-collapse: collapse;
+            margin: 10px;
+        }
+
+        .grid td {
+            background-color: #C5C6C7;
+            border: 2px solid #8e8d8a;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 13px
+        }
+
+        .grid td.clicked {
+            background-color: rgb(0, 0, 0);
+        }
+
+        .grid td.start {
+            background-color: green;
+        }
+
+        .grid td.end {
+            background-color: red;
+        }
+
+        .grid td.visited {
+            background-color: #DA7B93;
+            animation-name: example;
+            animation-duration: 4s;
+        }
+
+        .grid td.path {
+            background-color: #2E151B;
+            color: white;
+        }
+
+        .grid td.city {
+            background-color: pink;
+        }
+
+        .navBar {
+            display: grid;
+            margin-left: 10px;
+            width: 200px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .navBarBut {
+            position: relative;
+            display: inline-block;
+            padding: 1.5px;
+            cursor: pointer;
+        }
+        
+
+        .travDrop {
+            background-color: #0B0C10;
+            width: 200px;
+            height: 50px;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: 1px solid #66FCF1;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .content {
+            display: none;
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            background-color: #0B0C10;
+            border: 1px solid #66FCF1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .instructDrop {
+            background-color: #0B0C10;
+            width: 400px;
+            height: 50px;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: 1px solid #66FCF1;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        .instructions
+        {
+            display: none;
+            width: 398px;
+            height: 550px;
+            position: absolute;
+            background-color: #0B0C10;
+            border: 1px solid #66FCF1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            cursor: pointer;
+            margin-left: 20px;
+            color : white;
+            text-align: center;
+        }
+
+        .content button {
+            display: block;
+            background-color: #0B0C10;
+            border: 1px solid #66FCF1;
+            width: 200px;
+            height: 50px;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+
+        .but {
+            background-color: #0B0C10;
+            border: 1px solid #66FCF1;
+            width: 200px;
+            height: 50px;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            transition-duration: 0.4s;
+            margin-left: 1.5px;
+            margin-top: 1.5px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .but:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .arrow {
+            position: absolute;
+            border: solid #66FCF1;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+            right: 12px;
+            top: 22;
+        }
+
+        .right {
+            transform: rotate(-45deg);
+        }
+        .check 
+        {
+            margin-left: 20px;
+        }
+        h4
+        {
+            display:inline-block;
+            color:#C5C6C7;
+            font-size: 20px;
+        }
+        .navBarBut:hover .content {
+            display: inline-block;
+        }
+
+        .navBarBut:hover .instructions
+        {
+            display: block;
+        }
+
+        .content button:hover {
+            background-color: #45A29E;
+        }
+
+        .navBarBut:hover .travDrop {
+            background-color: #45A29E;
+        }
+    </style>
+
+<body>
+    <script src="vertex.js" type="text/javascript"></script>
+    <script src="mazeGeneration.js" type="text/javascript"></script>
+    <script src="grid.js" type="text/javascript"></script>
+    <div class="navBar">
+        <div class="navBarBut">
+            <button id="travDrop" class="travDrop">Traversal Algorithm </button>
+            <div class="arrow right"></div>
+            <div class="content">
+                <button id="bfs" class="dropBut" onclick="window.bfsBut(this)">BFS</buttton>
+                    <button id="dfs" class="dropBut" onclick="window.dfsBut(this)">DFS</button>
+            </div>
+        </div>
+        <div class="navBarBut">
+            <button id="searchDrop" class="travDrop">Search Algorithm</button>
+            <div class="arrow right"></div>
+            <div class="content">
+                <button id="dijk" class="dropBut" onclick="window.dijkBut(this)">Dijkstra's</buttton>
+                    <button id="aStar" class="dropBut" onclick="window.aStarBut(this)">A*</buttton>
+            </div>
+        </div>
+        <div class="navBarBut">
+            <button id="mazeDrop" class="travDrop">Generate Maze/Walls</button>
+            <div class="arrow right"></div>
+            <div class="content">
+                <button id="dfsMaze" class="dropBut" onclick="window.dfsMaze(this)">DFS maze</buttton>
+                <button id="dfsMaze" class="dropBut" onclick="window.a_bMaze(this)">Aldous-Broder</buttton>
+                <button id="dfsMaze" class="dropBut" onclick="window.vertical(this)">Vertical Walls</buttton>
+                <button id="dfsMaze" class="dropBut" onclick="window.horizontal(this)">Horizontal Walls</buttton>
+            </div>
+        </div>
+        <button type="button" class="but" id="clearBut" onclick="window.clear(this)">CLEAR</button>
+        <button type="button" class="but" id="clearBut" onclick="window.addWeight(this)">Add Weights</button>
+        <button type="button" class="but" id="startBut" onclick="window.startTraverse(this)" disabled>START</button>
+    </div>
+    <div class="check">
+        <input type="checkbox" class="checkbox" id="start" onchange="window.startCell(this)"><h4>Set Start Cell</h4></input>
+        <input type="checkbox" class="checkbox" id="end" onchange="window.endCell(this)"><h4>Set End Cell</h4></td>
+    </div>
+    <div class="navBarBut">
+        <button id="instructDrop" class="instructDrop">Instructions</button>
+        <div class="instructions">
+            <p>
+                Green: start cell, Red: end cell, Black: wall<br><br>
+                Traversal Algorithims (start cell required):<br>
+                Select Algorithim and click start
+                Traversal of entire grid from start cell. End 
+                cell is irrelevant.<br><br>
+                Search Algorithim(start and end cell required):<br>
+                Use start cell and end cell checkboxes to set start and<br>
+                end points. Select search algorithm and click start.<br><br>
+                Generate Maze/Wall:<br>
+                Select maze alogrithim or wall generation. Now you can<br>
+                use this new grid with walls with the pervious Algorithims<br><br>
+                Add weights:<br>
+                Will add random weights between 0 and 5 to each cell. This<br> 
+                is the cost to go into each cell. The search algorithims will<br> 
+                use this to find the shortest paths. Traversal Algorithims<br> 
+                do not take this weight into account<br><br>
+                Clear:<br>
+                Clear grid to original state<br>
+                Start:<br>
+                Start the traversal after a traversal/search algorithim has been selected<br><br>
+                Make sure to clear the board after each animation.<br>
+                Note: Optimal resolution should be 1600x1080 or higher. 
+            </p>
+        </div>
+    
+
+</body>
